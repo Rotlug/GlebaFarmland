@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.github.rotlug.glebafarmland.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "glebafarmland.refmap.json",
+  "mixins": [
+    "FarmlandBlockMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

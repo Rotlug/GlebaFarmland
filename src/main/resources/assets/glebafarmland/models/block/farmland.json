@@ -1,0 +1,7 @@
+{
+  "parent": "glebafarmland:block/template_farmland",
+  "textures": {
+    "dirt": "glebafarmland:block/dirt",
+    "top": "glebafarmland:block/farmland"
+  }
+}

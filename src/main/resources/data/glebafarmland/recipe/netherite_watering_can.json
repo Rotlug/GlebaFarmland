@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "base": {
+    "item": "glebafarmland:diamond_watering_can"
+  },
+  "result": {
+    "count": 1,
+    "id": "glebafarmland:netherite_watering_can"
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  }
+}

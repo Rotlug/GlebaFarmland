@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/handheld",
+	"textures": {
+		"layer0": "glebafarmland:item/netherite_watering_can_full_2d"
+	}
+}

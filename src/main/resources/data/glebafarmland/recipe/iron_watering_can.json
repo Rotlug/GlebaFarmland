@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "a": {
+      "item": "minecraft:iron_ingot"
+    },
+    "b": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "a a",
+    "aba",
+    "aaa"
+  ],
+  "result": {
+    "count": 1,
+    "id": "glebafarmland:iron_watering_can"
+  },
+  "show_notification": true
+}

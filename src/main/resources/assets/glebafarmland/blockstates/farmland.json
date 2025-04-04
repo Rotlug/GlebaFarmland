@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "moisture=0": {
+      "model": "glebafarmland:block/farmland"
+    },
+    "moisture=1": {
+      "model": "glebafarmland:block/farmland"
+    },
+    "moisture=2": {
+      "model": "glebafarmland:block/farmland"
+    },
+    "moisture=3": {
+      "model": "glebafarmland:block/farmland"
+    },
+    "moisture=4": {
+      "model": "glebafarmland:block/farmland"
+    },
+    "moisture=5": {
+      "model": "glebafarmland:block/farmland"
+    },
+    "moisture=6": {
+      "model": "glebafarmland:block/farmland"
+    },
+    "moisture=7": {
+      "model": "glebafarmland:block/farmland_moist"
+    }
+  }
+}

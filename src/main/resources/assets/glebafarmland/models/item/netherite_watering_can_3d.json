@@ -1,0 +1,6 @@
+{
+  "parent": "glebafarmland:item/watering_can_3d",
+  "textures": {
+    "0": "glebafarmland:item/netherite_watering_can_full"
+  }
+}

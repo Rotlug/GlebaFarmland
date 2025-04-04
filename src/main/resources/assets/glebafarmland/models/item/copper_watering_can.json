@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "glebafarmland:item/copper_watering_can_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "glebafarmland:item/copper_watering_can_2d"
+    },
+    "ground": {
+      "parent": "glebafarmland:item/copper_watering_can_2d"
+    }
+  }
+}

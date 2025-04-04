@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "a": {
+      "item": "minecraft:gold_ingot"
+    },
+    "b": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "pattern": [
+    "a a",
+    "aba",
+    "aaa"
+  ],
+  "result": {
+    "count": 1,
+    "id": "glebafarmland:gold_watering_can"
+  },
+  "show_notification": true
+}
