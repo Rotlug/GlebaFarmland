@@ -1,7 +1,7 @@
 package com.github.rotlug.glebafarmland.item.wateringCan;
 
+import com.github.rotlug.glebafarmland.Config;
 import com.github.rotlug.glebafarmland.Glebafarmland;
-import com.github.rotlug.glebafarmland.ModEventSubscriber;
 import com.github.rotlug.glebafarmland.event.WateringCanFailEvent;
 import com.github.rotlug.glebafarmland.event.WateringCanFillEvent;
 import com.github.rotlug.glebafarmland.event.WateringCanPourEvent;
@@ -52,7 +52,7 @@ public class WateringCanEventsHandler {
         }
 
         // Special nether interaction
-        if (level.dimension().equals(ServerLevel.NETHER) && !ModEventSubscriber.allowNether && !(ModEventSubscriber.allowNetheriteCanAnyways && stack.is(ModItems.NETHERITE_WATERING_CAN.get()))) {
+        if (level.dimension().equals(ServerLevel.NETHER) && !Config.allowNether && !(Config.allowNetheriteCanAnyways && stack.is(ModItems.NETHERITE_WATERING_CAN.get()))) {
             for (int i = 0; i < 8; i++) {
                 double offsetX = 0.5;
                 double offsetY = state.getShape(level,pos).max(Direction.Axis.Y);
@@ -78,11 +78,11 @@ public class WateringCanEventsHandler {
             state = level.getBlockState(pos);
             Util.setMoist(level, pos);
         // dirt to mud conversion
-        } else if (ModEventSubscriber.mudOdds > 0 && (state.is(Blocks.DIRT) || state.is(Blocks.COARSE_DIRT) || state.is(Blocks.ROOTED_DIRT)) && RNG.ihundo(ModEventSubscriber.mudOdds)) {
+        } else if (Config.mudOdds > 0 && (state.is(Blocks.DIRT) || state.is(Blocks.COARSE_DIRT) || state.is(Blocks.ROOTED_DIRT)) && RNG.ihundo(Config.mudOdds)) {
             level.setBlock(pos, Blocks.MUD.defaultBlockState(),3);
             level.playSound(null,pos, SoundEvents.MUD_PLACE, SoundSource.BLOCKS, 1, 1);
         // fire extinguishing mechanics (last)
-        } else if (ModEventSubscriber.extinguishFires) {
+        } else if (Config.extinguishFires) {
         // Campfires
             if (state.is(BlockTags.CAMPFIRES) && state.getValue(BlockStateProperties.LIT)) {
                 level.setBlock(pos, state.setValue(BlockStateProperties.LIT, false), 3);
@@ -107,12 +107,11 @@ public class WateringCanEventsHandler {
         }
 
         // Bonemeal mechanic
-        if (ModEventSubscriber.bonemealOdds > 0 && RNG.ihundo(ModEventSubscriber.bonemealOdds)) {
+        if (Config.bonemealOdds > 0 && RNG.ihundo(Config.bonemealOdds)) {
             pos = pos.above();
             state = level.getBlockState(pos);
             Block block = state.getBlock();
-            if (state.is(BlockTags.CROPS) && block instanceof CropBlock) {
-                CropBlock crop = (CropBlock) block;
+            if (state.is(BlockTags.CROPS) && block instanceof CropBlock crop) {
                 crop.performBonemeal(level, level.getRandom(), pos, state);
             }
         }
@@ -121,7 +120,7 @@ public class WateringCanEventsHandler {
 
     @SubscribeEvent
     public static void onWateringCanFailEvent(WateringCanFailEvent event) {
-        ServerLevel serverLevel = event.serverLevel;
+//        ServerLevel serverLevel = event.serverLevel;
         ServerPlayer player = event.player;
         ItemStack stack = event.stack;
 
@@ -154,7 +153,7 @@ public class WateringCanEventsHandler {
         ServerLevel level = event.serverLevel;
         ServerPlayer player = event.player;
         ItemStack stack = event.stack;
-        int superLevel = event.superLevel;
+//        int superLevel = event.superLevel;
         AABB area = event.area;
 
         // Calculate the size of the area //TODO?: Maybe store these values for each superLevel when they're defined in the config

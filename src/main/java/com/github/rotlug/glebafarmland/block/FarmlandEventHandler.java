@@ -1,12 +1,10 @@
 package com.github.rotlug.glebafarmland.block;
 
+import com.github.rotlug.glebafarmland.Config;
 import com.github.rotlug.glebafarmland.Glebafarmland;
-import com.github.rotlug.glebafarmland.ModEventSubscriber;
 import com.github.rotlug.glebafarmland.tag.DewDropBlockTags;
 import com.github.rotlug.glebafarmland.util.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ChunkMap;
-import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
@@ -20,23 +18,20 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
-import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class FarmlandEventHandler {
     @SubscribeEvent
     public static void onFarmlandTrampleEvent(BlockEvent.FarmlandTrampleEvent event) {
-        if (ModEventSubscriber.noTrample) {
+        if (Config.noTrample) {
             event.setCanceled(true);
         }
     }
 
     @SubscribeEvent
     public static void onSplashWaterBottleHitEvent(ProjectileImpactEvent event) {
-        if (!ModEventSubscriber.splashPotionWatering) {
+        if (!Config.splashPotionWatering) {
             return;
         }
 
@@ -48,12 +43,12 @@ public class FarmlandEventHandler {
                 }
                 BlockPos pos = BlockPos.containing(event.getRayTraceResult().getLocation());
                 Glebafarmland.LOGGER.info(String.valueOf(pos));
-                if (ModEventSubscriber.splashWaterArea == 0) {
+                if (Config.splashWaterArea == 0) {
                     if (level.getBlockState(pos).is(DewDropBlockTags.WATERABLE)) {
                         Util.setMoist(((ServerLevel) level), pos);
                     }
                 } else {
-                    BlockPos.withinManhattanStream(pos, ModEventSubscriber.splashWaterArea, 0, ModEventSubscriber.splashWaterArea).forEach(blockPos -> {
+                    BlockPos.withinManhattanStream(pos, Config.splashWaterArea, 0, Config.splashWaterArea).forEach(blockPos -> {
                         BlockState state = level.getBlockState(blockPos);
                         if (state.is(DewDropBlockTags.WATERABLE)) {
                             Util.setMoist(((ServerLevel) level), blockPos);
@@ -72,7 +67,7 @@ public class FarmlandEventHandler {
             return;
         }
 
-        if (!ModEventSubscriber.bucketWatering &&! ModEventSubscriber.bottleWatering) {
+        if (!Config.bucketWatering &&! Config.bottleWatering) {
             return;
         }
 
@@ -82,7 +77,7 @@ public class FarmlandEventHandler {
         if (!state.is(DewDropBlockTags.WATERABLE)) {
             if (state.is(BlockTags.CROPS) && level.getBlockState(pos.below()).is(DewDropBlockTags.WATERABLE)) {
                 pos = pos.below();
-                state = level.getBlockState(pos);
+//                state = level.getBlockState(pos);
             } else {
                 return;
             }
@@ -91,11 +86,11 @@ public class FarmlandEventHandler {
         ItemStack stack = player.getItemInHand(event.getHand());
 
 
-        if (ModEventSubscriber.bucketWatering && stack.is(Items.WATER_BUCKET)) {
+        if (Config.bucketWatering && stack.is(Items.WATER_BUCKET)) {
             if (!player.isCreative()) {
                 player.setItemInHand(event.getHand(), new ItemStack(Items.BUCKET));
             }
-        } else if (ModEventSubscriber.bottleWatering && stack.is(Items.POTION)) {
+        } else if (Config.bottleWatering && stack.is(Items.POTION)) {
             if (!player.isCreative()) {
                 player.setItemInHand(event.getHand(), new ItemStack(Items.GLASS_BOTTLE));
             }

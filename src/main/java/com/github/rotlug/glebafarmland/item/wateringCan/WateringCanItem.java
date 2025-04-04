@@ -1,7 +1,6 @@
 package com.github.rotlug.glebafarmland.item.wateringCan;
 
-import com.github.rotlug.glebafarmland.Glebafarmland;
-import com.github.rotlug.glebafarmland.ModEventSubscriber;
+import com.github.rotlug.glebafarmland.Config;
 import com.github.rotlug.glebafarmland.event.WateringCanFailEvent;
 import com.github.rotlug.glebafarmland.event.WateringCanFillEvent;
 import com.github.rotlug.glebafarmland.event.WateringCanPourEvent;
@@ -131,7 +130,7 @@ public class WateringCanItem extends Item {
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+    public void releaseUsing(@NotNull ItemStack stack, Level level, @NotNull LivingEntity entity, int timeLeft) {
         // All logic should be handled Server Side
         // Assume level and player are ServerLevel and ServerPlayer respectively
         if (level.isClientSide()) {
@@ -177,7 +176,7 @@ public class WateringCanItem extends Item {
     }
 
     @Override
-    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int timeLeft) {
+    public void onUseTick(Level level, @NotNull LivingEntity livingEntity, @NotNull ItemStack stack, int timeLeft) {
         if  (level.isClientSide()) {
             return;
         }
@@ -240,28 +239,28 @@ public class WateringCanItem extends Item {
 
         switch (superLevelToUse) {
             case 1:
-                forward = ModEventSubscriber.super1forward;
-                back = ModEventSubscriber.super1back;
-                left = ModEventSubscriber.super1left;
-                right = ModEventSubscriber.super1right;
+                forward = Config.super1forward;
+                back = Config.super1back;
+                left = Config.super1left;
+                right = Config.super1right;
                 break;
             case 2:
-                forward = ModEventSubscriber.super2forward;
-                back = ModEventSubscriber.super2back;
-                left = ModEventSubscriber.super2left;
-                right = ModEventSubscriber.super2right;
+                forward = Config.super2forward;
+                back = Config.super2back;
+                left = Config.super2left;
+                right = Config.super2right;
                 break;
             case 3:
-                forward = ModEventSubscriber.super3forward;
-                back = ModEventSubscriber.super3back;
-                left = ModEventSubscriber.super3left;
-                right = ModEventSubscriber.super3right;
+                forward = Config.super3forward;
+                back = Config.super3back;
+                left = Config.super3left;
+                right = Config.super3right;
                 break;
             case 4:
-                forward = ModEventSubscriber.super4forward;
-                back = ModEventSubscriber.super4back;
-                left = ModEventSubscriber.super4left;
-                right = ModEventSubscriber.super4right;
+                forward = Config.super4forward;
+                back = Config.super4back;
+                left = Config.super4left;
+                right = Config.super4right;
                 break;
             default:
                 break;
