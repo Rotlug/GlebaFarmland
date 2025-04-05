@@ -190,7 +190,7 @@ public class WateringCanEventsHandler {
     }
 
     private static void damageWithoutBreaking(int value, ItemStack itemStack, Player player) {
-        if (getDurability(itemStack) >= value) {
+        if (getDurability(itemStack) > value) {
             itemStack.hurtAndBreak(value, player, player.getEquipmentSlotForItem(itemStack));
         }
         else {
