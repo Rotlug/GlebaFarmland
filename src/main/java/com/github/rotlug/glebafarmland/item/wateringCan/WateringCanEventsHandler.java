@@ -73,7 +73,7 @@ public class WateringCanEventsHandler {
         if (Util.isDryWaterable(level, pos)) {
             Util.setMoist(level, pos);
         // if the block is a crop, ontop of farmland
-        } else if (state.is(BlockTags.CROPS) && Util.isDryWaterable(level, pos.below())) {
+        } else if (Util.isDryWaterable(level, pos.below())) {
             pos = pos.below();
             state = level.getBlockState(pos);
             Util.setMoist(level, pos);
