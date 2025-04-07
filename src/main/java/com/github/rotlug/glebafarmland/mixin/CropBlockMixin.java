@@ -1,18 +1,14 @@
 package com.github.rotlug.glebafarmland.mixin;
 
+import com.github.rotlug.glebafarmland.Glebafarmland;
+import com.github.rotlug.glebafarmland.util.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.fml.ModList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,11 +18,8 @@ import sereneseasons.api.season.Season;
 import sereneseasons.api.season.SeasonHelper;
 import sereneseasons.init.ModTags;
 
-import java.util.Optional;
-
 @Mixin(CropBlock.class)
 public class CropBlockMixin {
-
     @Inject(method = "performBonemeal", at = @At("HEAD"), cancellable = true)
     private void preventBonemealOutOfSeason(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, CallbackInfo ci) {
         if (!ModList.get().isLoaded("sereneseasons")) return;
@@ -42,6 +35,13 @@ public class CropBlockMixin {
 
         if (!valid) {
             ci.cancel();
+        }
+    }
+
+    @Inject(method = "randomTick", at = @At("HEAD"), cancellable = true)
+    private void cancelGrowthIfFarmlandIsDry(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
+        if (Util.isDryWaterable(level, pos.below())) {
+            ci.cancel(); // Cancel crop growth tick if dry
         }
     }
 }
