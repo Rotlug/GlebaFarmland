@@ -51,7 +51,9 @@ public class Config {
     private static final ModConfigSpec.BooleanValue SHOVEL_REVERTING = BUILDER
             .comment("If shovels can turn farmland to dirt when right clicking")
             .define("shovelReverting", true);
-
+    private static final ModConfigSpec.BooleanValue BONEMEAL_REQUIRE_WET = BUILDER
+            .comment("Prevent bone-meal from working on dry farmland")
+            .define("bonemealRequireWet", true);
 
     // Watering Cans
     // Super level 1
@@ -170,6 +172,7 @@ public class Config {
     public static boolean sturdyFarmland;
     public static boolean noRandomTick;
     public static boolean shovelReverting;
+    public static boolean bonemealRequireWet;
 
 
     @SubscribeEvent
@@ -187,6 +190,7 @@ public class Config {
         sturdyFarmland = STURDY_FARMLAND.get();
         noRandomTick = NO_RANDOM_TICK.get();
         shovelReverting = SHOVEL_REVERTING.get();
+        bonemealRequireWet = BONEMEAL_REQUIRE_WET.get();
 
         // Watering Cans
         super1forward = SUPER_1_FORWARD.get();

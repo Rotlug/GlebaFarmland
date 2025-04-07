@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "glebafarmland.refmap.json",
   "mixins": [
-    "FarmlandBlockMixin"
+    "BoneMealMixin",
+    "CropBlockMixin",
+    "HoeTillMixin"
   ],
   "client": [
   ],

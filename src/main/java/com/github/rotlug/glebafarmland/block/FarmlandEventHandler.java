@@ -42,7 +42,6 @@ public class FarmlandEventHandler {
                     return;
                 }
                 BlockPos pos = BlockPos.containing(event.getRayTraceResult().getLocation());
-                Glebafarmland.LOGGER.info(String.valueOf(pos));
                 if (Config.splashWaterArea == 0) {
                     if (level.getBlockState(pos).is(DewDropBlockTags.WATERABLE)) {
                         Util.setMoist(((ServerLevel) level), pos);

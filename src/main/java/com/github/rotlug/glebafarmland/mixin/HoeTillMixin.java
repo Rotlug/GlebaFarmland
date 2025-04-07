@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(HoeItem.class)
-public abstract class FarmlandBlockMixin {
+public abstract class HoeTillMixin {
     @Inject(method = "useOn", at = @At("HEAD"), cancellable = true)
     private void injectCustomFarmland(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
         Level level = context.getLevel();
