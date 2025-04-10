@@ -40,8 +40,6 @@ public class WateringCanEventsHandler {
         BlockState state = event.state;
         boolean isSuper = event.isSuper;
 
-        Glebafarmland.LOGGER.info(String.valueOf(event.isSuper));
-
         // When pouring as a part of a super, these should be handled by the super event
         if  (!isSuper) {
             // Damage the item by 1

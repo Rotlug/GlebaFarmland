@@ -7,6 +7,7 @@ import com.github.rotlug.glebafarmland.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.ItemStack;
@@ -37,7 +38,10 @@ public class FarmlandEventHandler {
 
         if (event.getProjectile() instanceof ThrownPotion) {
             if (event.getRayTraceResult().getType() == HitResult.Type.BLOCK) {
-                Level level = (Objects.requireNonNull(event.getProjectile().getOwner()).level());
+                Entity entity = event.getProjectile().getOwner();
+                if (entity == null) return;
+                Level level = entity.level();
+
                 if (level.isClientSide()) {
                     return;
                 }

@@ -2,13 +2,19 @@ package com.github.rotlug.glebafarmland.util;
 
 
 
+import com.github.rotlug.glebafarmland.Glebafarmland;
 import com.github.rotlug.glebafarmland.tag.DewDropBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.HitResult;
+import net.neoforged.fml.ModList;
+import sereneseasons.api.season.Season;
+import sereneseasons.api.season.SeasonHelper;
+import sereneseasons.init.ModTags;
 
 public final class Util {
 
@@ -39,4 +45,17 @@ public final class Util {
         level.setBlock(pos, level.getBlockState(pos).setValue(BlockStateProperties.MOISTURE, 0), 3);
     }
 
+    // Serene Seasons check
+    public static boolean isRightSeason(ServerLevel level, BlockState state) {
+        if (!ModList.get().isLoaded("sereneseasons")) return true;
+
+        Season season = SeasonHelper.getSeasonState(level).getSeason();
+
+        return switch (season) {
+            case SPRING -> state.is(ModTags.Blocks.SPRING_CROPS);
+            case SUMMER -> state.is(ModTags.Blocks.SUMMER_CROPS);
+            case AUTUMN -> state.is(ModTags.Blocks.AUTUMN_CROPS);
+            case WINTER -> state.is(ModTags.Blocks.WINTER_CROPS);
+        };
+    }
 }
