@@ -13,6 +13,7 @@ import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -101,5 +102,22 @@ public class FarmlandEventHandler {
             return;
         }
         Util.setMoist(level, pos);
+    }
+
+    /*
+    Replace Regular farmland with modified farmland
+     */
+    @SubscribeEvent
+    public static void blockPlaceEvent(BlockEvent.EntityPlaceEvent event) {
+        if (event.getPlacedBlock().is(Blocks.FARMLAND)) {
+            event.getLevel().setBlock(event.getPos(), ModBlocks.FARMLAND.get().defaultBlockState(), 3);
+        }
+    }
+
+    @SubscribeEvent
+    public static void blockToolModEvent(BlockEvent.BlockToolModificationEvent event) {
+        if (event.getFinalState().is(Blocks.FARMLAND)) {
+            event.setFinalState(ModBlocks.FARMLAND.get().defaultBlockState());
+        }
     }
 }

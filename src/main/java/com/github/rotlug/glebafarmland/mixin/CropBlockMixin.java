@@ -1,5 +1,6 @@
 package com.github.rotlug.glebafarmland.mixin;
 
+import com.github.rotlug.glebafarmland.Glebafarmland;
 import com.github.rotlug.glebafarmland.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -20,6 +21,8 @@ public class CropBlockMixin {
 
     @Inject(method = "randomTick", at = @At("HEAD"), cancellable = true)
     private void cancelGrowthIfFarmlandIsDry(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
+        if (!Util.isRightSeason(level, state)) ci.cancel();
+
         if (Util.isDryWaterable(level, pos.below())) {
             ci.cancel(); // Cancel crop growth tick if dry
         }
